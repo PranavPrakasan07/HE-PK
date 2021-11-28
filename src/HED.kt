@@ -13,13 +13,13 @@ object HED {
 
     @JvmStatic
     fun encryptHE(input: String?): String {
-        val ena = input?.let { r?.let { it1 -> paillier!!.EncryptString(it, it1) } }
+        val ena = input?.let { r?.let { it1 -> paillier!!.encryptString(it, it1) } }
         return ena.toString()
     }
 
     @JvmStatic
     fun decryptHE(input: String): String {
-        return paillier!!.DecryptString(BigInteger(input))
+        return paillier!!.decryptString(BigInteger(input))
     }
 
     init {
@@ -29,13 +29,13 @@ object HED {
         // check if the file already exists
         if (fileOps!!.check(FILENAME)) {
             val temp = fileOps!!.getKey(FILENAME)
-            paillier!!.KeyGeneration(512, 62, temp[0], temp[1])
+            paillier!!.keyGeneration(512, 62, temp[0], temp[1])
             r = temp[2]
         } else {
 
             // temp = [p, q, r]
             r = BigInteger(512, Random())
-            paillier!!.KeyGeneration(512, 62)
+            paillier!!.keyGeneration(512, 62)
 
             // Returns [p, q]
             val temp: Array<BigInteger?> = paillier!!.pQ

@@ -12,7 +12,7 @@ class Paillier {
     private var bitLength = 0
 
     constructor(bitLengthVal: Int, certainty: Int) {
-        KeyGeneration(bitLengthVal, certainty)
+        keyGeneration(bitLengthVal, certainty)
     }
 
     constructor() {}
@@ -25,7 +25,7 @@ class Paillier {
             return res
         }
 
-    fun KeyGeneration(bitLengthVal: Int, certainty: Int) {
+    fun keyGeneration(bitLengthVal: Int, certainty: Int) {
         bitLength = bitLengthVal
         p = BigInteger(bitLength / 2, certainty, Random())
         q = BigInteger(bitLength / 2, certainty, Random())
@@ -39,7 +39,7 @@ class Paillier {
         }
     }
 
-    fun KeyGeneration(bitLengthVal: Int, certainty: Int, a: BigInteger?, b: BigInteger?) {
+    fun keyGeneration(bitLengthVal: Int, certainty: Int, a: BigInteger?, b: BigInteger?) {
         bitLength = bitLengthVal
         p = a
         q = b
@@ -65,20 +65,20 @@ class Paillier {
     }
 
     // Random r, 0 < r < n
-    private fun Encryption(m: BigInteger?, r: BigInteger): BigInteger {
+    private fun encryption(m: BigInteger?, r: BigInteger): BigInteger {
 
         // ciphertext c = ((g^m) * (r^n)) mod (n*n)
         return g!!.modPow(m, nsquare).multiply(r.modPow(n, nsquare)).mod(nsquare)
     }
 
-    private fun Decryption(c: BigInteger): BigInteger {
+    private fun decryption(c: BigInteger): BigInteger {
         val u = g!!.modPow(lambda, nsquare).subtract(BigInteger.ONE).divide(n).modInverse(n)
 
         // plaintext m = (L * ((c^lambda) mod (n*n)) * mu mod n
         return c.modPow(lambda, nsquare).subtract(BigInteger.ONE).divide(n).multiply(u).mod(n)
     }
 
-    fun EncryptString(st: String, r: BigInteger): BigInteger {
+    fun encryptString(st: String, r: BigInteger): BigInteger {
         var temp = st[0].code
         println(temp)
         var num = BigInteger(temp.toString())
@@ -88,11 +88,11 @@ class Paillier {
             num = num.multiply(BigInteger.valueOf(1000)).add(BigInteger.valueOf(temp.toLong()))
             println("num:$num")
         }
-        return Encryption(num, r)
+        return encryption(num, r)
     }
 
-    fun DecryptString(num: BigInteger): String {
-        val num1 = Decryption(num)
+    fun decryptString(num: BigInteger): String {
+        val num1 = decryption(num)
         println("SecondBig:$num1")
         val strc = num1.toString().length
         println("strc length:$strc")
