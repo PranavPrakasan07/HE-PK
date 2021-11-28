@@ -1,10 +1,6 @@
-import java.io.File
+import java.io.*
 import java.math.BigInteger
-import java.io.PrintWriter
 import java.util.Objects
-import java.io.BufferedReader
-import java.io.FileReader
-import java.io.IOException
 import java.lang.Exception
 import java.nio.charset.StandardCharsets
 
@@ -37,6 +33,7 @@ class FileOps {
     }
 
     fun getKey(FILENAME: String): Array<BigInteger?> {
+
         var br: BufferedReader? = null
         var fr: FileReader? = null
         var sCurrentLine: String
@@ -44,10 +41,9 @@ class FileOps {
         try {
             fr = FileReader(FILENAME)
             br = BufferedReader(fr)
-            br = BufferedReader(FileReader(FILENAME))
             var i = 0
-            while (br.readLine().also { sCurrentLine = it } != null) {
-                temp[i] = BigInteger(sCurrentLine)
+            fr.readLines().forEach {
+                temp[i] = BigInteger(it)
                 i++
             }
         } catch (e: IOException) {
