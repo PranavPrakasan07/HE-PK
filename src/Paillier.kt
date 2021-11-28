@@ -80,24 +80,24 @@ class Paillier {
 
     fun encryptString(st: String, r: BigInteger): BigInteger {
         var temp = st[0].code
-        println(temp)
+//        println(temp)
         var num = BigInteger(temp.toString())
         for (i in 1 until st.length) {
             temp = st[i].code
-            println(temp)
+//            println(temp)
             num = num.multiply(BigInteger.valueOf(1000)).add(BigInteger.valueOf(temp.toLong()))
-            println("num:$num")
+//            println("num:$num")
         }
         return encryption(num, r)
     }
 
     fun decryptString(num: BigInteger): String {
         val num1 = decryption(num)
-        println("SecondBig:$num1")
+//        println("SecondBig:$num1")
         val strc = num1.toString().length
-        println("strc length:$strc")
+//        println("strc length:$strc")
         var m = num1.toString()
-        println("m string$m")
+//        println("m string$m")
         if (strc % 3 != 0) {
             m = "0$m"
         }
@@ -105,7 +105,7 @@ class Paillier {
         var i = 0
         while (i < m.length) {
             strd.append(m.substring(i, i + 3).toInt().toChar())
-            println("Process:$strd")
+//            println("Process:$strd")
             i += 3
         }
         return strd.toString()

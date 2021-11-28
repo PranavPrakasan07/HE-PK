@@ -6,7 +6,7 @@ import java.util.*
  */
 object HED {
     // Store the keys, in the file
-    private var FILENAME = "keyStorage"
+    private var FILENAME = "src/keyStorage"
     private var paillier: Paillier? = null
     private var fileOps: FileOps? = null
     private var r: BigInteger? = null

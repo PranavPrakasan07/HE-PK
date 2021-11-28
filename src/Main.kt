@@ -8,7 +8,9 @@ internal object Main {
         val enteredText = "Trial is this okay"
 
         val encryptedText = encryptHE(enteredText)
+        val decryptedText = decryptHE(encryptedText)
+
         println("ENA-OBJ:$encryptedText")
-        println("DEC-OBJ:" + decryptHE(encryptedText))
+        println("DEC-OBJ:$decryptedText")
     }
 }
